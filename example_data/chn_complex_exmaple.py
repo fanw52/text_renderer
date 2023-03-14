@@ -30,7 +30,7 @@ font_cfg = dict(
 perspective_transform = NormPerspectiveTransformCfg(5, 5, 1.5)
 
 chn_data = GeneratorCfg(
-    num_image=50,
+    num_image=2000000,
     save_dir=OUT_DIR / "char_complex_corpus",
     render_cfg=RenderCfg(
         bg_dir=BG_DIR,
@@ -39,7 +39,7 @@ chn_data = GeneratorCfg(
             CharCorpusCfg(
                 text_paths=[TEXT_DIR / "wiki_complex_corpusv2.txt"],
                 filter_by_chars=True,
-                chars_file=CHAR_DIR / "gb2312.txt",
+                chars_file=CHAR_DIR / "complex.txt",
                 length=(10, 18),
                 **font_cfg
             ),
