@@ -23,44 +23,44 @@ TEXT_DIR = DATA_DIR / "text"
 
 font_cfg = dict(
     font_dir=FONT_DIR,
-    font_list_file=FONT_LIST_DIR / "font_list.txt",
+    font_list_file=FONT_LIST_DIR / "chn_font_list.txt",
     font_size=(30, 31),
 )
 
-perspective_transform = NormPerspectiveTransformCfg(5, 5, 1.5)
+perspective_transform = NormPerspectiveTransformCfg(20, 20, 1.5)
 
 chn_data = GeneratorCfg(
-    num_image=50,
+    num_image= 500000,
     save_dir=OUT_DIR / "char_corpus",
     render_cfg=RenderCfg(
         bg_dir=BG_DIR,
         perspective_transform=perspective_transform,
         corpus=CharCorpus(
             CharCorpusCfg(
-                text_paths=[TEXT_DIR / "chn_text.txt", TEXT_DIR / "eng_text.txt"],
+                text_paths=[TEXT_DIR / "wiki_corpus_part.txt"],
                 filter_by_chars=True,
                 chars_file=CHAR_DIR / "chn.txt",
-                length=(5, 10),
-                char_spacing=(-0.3, 1.3),
+                length=(10, 18),
+                # char_spacing=(-0.3, 1.3),
                 **font_cfg
             ),
         ),
-        corpus_effects=Effects([Line(0.5), OneOf([DropoutRand(), DropoutVertical()])]),
+        corpus_effects=Effects([Line(0.2), OneOf([DropoutRand(p=0.2,dropout_p=(0.01,0.2)), DropoutVertical(p=0.2,num_line=5),])]),
     ),
 )
 
 
 enum_data = GeneratorCfg(
-    num_image=50,
+    num_image=100000,
     save_dir=OUT_DIR / "enum_corpus",
     render_cfg=RenderCfg(
         bg_dir=BG_DIR,
-        perspective_transform=perspective_transform,
+        # perspective_transform=perspective_transform,
         corpus=EnumCorpus(
             EnumCorpusCfg(
-                text_paths=[TEXT_DIR / "enum_text.txt"],
+                text_paths=[TEXT_DIR / "wiki_part_enum_corpusB.txt"],
                 filter_by_chars=True,
-                chars_file=CHAR_DIR / "chn.txt",
+                chars_file=CHAR_DIR / "character.docs.txt",
                 **font_cfg
             ),
         ),
@@ -78,17 +78,16 @@ rand_data = GeneratorCfg(
 )
 
 eng_word_data = GeneratorCfg(
-    num_image=100000,
+    num_image=50,
     save_dir=OUT_DIR / "word_corpus",
     render_cfg=RenderCfg(
         bg_dir=BG_DIR,
         perspective_transform=perspective_transform,
         corpus=WordCorpus(
             WordCorpusCfg(
-                text_paths=[TEXT_DIR / "twitter_en_part.txt"],
+                text_paths=[TEXT_DIR / "eng_text.txt"],
                 filter_by_chars=True,
                 chars_file=CHAR_DIR / "eng.txt",
-                num_word = (3,10),
                 **font_cfg
             ),
         ),
@@ -141,7 +140,7 @@ extra_text_line_data = GeneratorCfg(
         corpus=[
             CharCorpus(
                 CharCorpusCfg(
-                    text_paths=[TEXT_DIR / "chn_text.txt", TEXT_DIR / "eng_text.txt"],
+                    text_paths=[TEXT_DIR / "wiki_corpus_part.txt", TEXT_DIR / "eng_text.txt"],
                     filter_by_chars=True,
                     chars_file=CHAR_DIR / "chn.txt",
                     length=(9, 10),
@@ -167,7 +166,18 @@ extra_text_line_data = GeneratorCfg(
     ),
 )
 
+# fmt: off
+# The configuration file must have a configs variable
 configs = [
-    eng_word_data
+    # chn_data,
+    enum_data,
+    # rand_data,
+    # eng_word_data,
+    # same_line_data,
+    # extra_text_line_data
 ]
-
+# fmt: on
+# configs = [
+#     ch_word_data,
+#     eng_word_data
+# ]
