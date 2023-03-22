@@ -135,10 +135,10 @@ if __name__ == '__main__':
     import jsonlines
     mode = 'test'
     # label_path = '/data/wufan/text_render/example_data/output/word_corpus/labels.json'
-    label_path = f'/data/wufan/text_render/example_data/output/char_corpus/label_{mode}_mini.json'
+    label_path = f'/data/wufan/text_renderer/example_data/output/char_complex_corpus/labels.json'
     # img_dir = '/data/wufan/text_render/example_data/output/word_corpus/images'
-    img_dir = '/data/wufan/text_render/example_data/output/char_corpus/images'
-    lmdb_save_path = f'/data/wufan/data/lmdb_data/zh_4m_mini/{mode}'
+    img_dir = '/data/wufan/text_renderer/example_data/output/char_complex_corpus/images'
+    lmdb_save_path = f'/data/wufan/data/OCRData/20230315_tranditional_text_line_rec/sqlite'
     lmdb_name = os.path.basename(lmdb_save_path)
     # jsonl_save_path = f'/data/wufan/data/database/jsonl/{lmdb_name}.jsonl'
 

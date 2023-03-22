@@ -78,14 +78,14 @@ rand_data = GeneratorCfg(
 )
 
 eng_word_data = GeneratorCfg(
-    num_image=100000,
+    num_image=1000000,
     save_dir=OUT_DIR / "word_corpus",
     render_cfg=RenderCfg(
         bg_dir=BG_DIR,
         perspective_transform=perspective_transform,
         corpus=WordCorpus(
             WordCorpusCfg(
-                text_paths=[TEXT_DIR / "twitter_en_part.txt"],
+                text_paths=[TEXT_DIR / "twitter_en_big.txt"],
                 filter_by_chars=True,
                 chars_file=CHAR_DIR / "eng.txt",
                 num_word = (3,10),
